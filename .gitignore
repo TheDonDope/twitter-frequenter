@@ -230,4 +230,4 @@ $RECYCLE.BIN/
 result*
 coordinates.json
 twitter-frequenter
-!/twitter-frequenter/**
+!/cmd/twitter-frequenter/**
