@@ -1,4 +1,4 @@
-package types
+package csv
 
 // Tweet is the struct for the information on the tweet
 type Tweet struct {

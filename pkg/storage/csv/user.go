@@ -1,4 +1,4 @@
-package types
+package csv
 
 // User is the struct for the information on the Twitter user
 type User struct {

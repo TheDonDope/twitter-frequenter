@@ -2,3 +2,5 @@ github.com/jessevdk/go-flags v1.4.0 h1:4IU2WS7AumrZ/40jfhf4QVDMsQwqA7VEHozFRrGAR
 github.com/jessevdk/go-flags v1.4.0/go.mod h1:4FA24M0QyGHXBuZZK/XkWh8h0e1EYbRYJSGM75WSRxI=
 github.com/jszwec/csvutil v1.2.1 h1:9+vmGqMdYxIbeDmVbTrVryibx2izwHAfKdPwl4GPNHM=
 github.com/jszwec/csvutil v1.2.1/go.mod h1:8YHz6C3KVdIeCxLMvwbbIVDCTA/Wi2df93AZlQNaE2U=
+gitlab.com/TheDonDope/gocha/v3 v3.0.0 h1:7KyZoyTO1iUF+88RgkMA52kM5UbdOuvZZ9SQYSYRaCY=
+gitlab.com/TheDonDope/gocha/v3 v3.0.0/go.mod h1:LVcSMF4i7iImovYf4d/UpXRuPhf9uDZBhjoG5ijzm8A=

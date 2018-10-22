@@ -6,10 +6,6 @@
 
 <https://about.twitter.com/en_us/values/elections-integrity.html#data>
 
-## Versions
-
-### v1.0.0 (2018-10-21)
-
 ## Building
 
 - Build the main command:
