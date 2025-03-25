@@ -3,18 +3,14 @@ package golginoxposing
 import (
 	"encoding/csv"
 	"io"
-	"io/ioutil"
 	"log"
 	"math"
 	"os"
 	"runtime"
-	"time"
 
+	"github.com/TheDonDope/twitter-frequenter/pkg/config"
+	storage "github.com/TheDonDope/twitter-frequenter/pkg/storage/csv"
 	"github.com/jszwec/csvutil"
-	"gitlab.com/TheDonDope/gocha/v3/pkg/errors"
-	"gitlab.com/TheDonDope/gocha/v3/pkg/logging"
-	"gitlab.com/TheDonDope/twitter-frequenter/pkg/config"
-	storage "gitlab.com/TheDonDope/twitter-frequenter/pkg/storage/csv"
 )
 
 // Service describes methods
@@ -37,13 +33,17 @@ func NewService() Service {
 // Execute the service method, either concurrently or serially based on configration options.
 func (s *service) Execute() {
 	if config.Opts.Concurrent {
-		logging.Printfln("Starting concurrent processing @ %v", time.Now().Format(time.RFC3339))
+		// TODO: rewrite
+		// logging.Printfln("Starting concurrent processing @ %v", time.Now().Format(time.RFC3339))
 		s.Concurrently()
-		logging.Printfln("Finished concurrent processing @ %v", time.Now().Format(time.RFC3339))
+		// TODO: rewrite
+		// logging.Printfln("Finished concurrent processing @ %v", time.Now().Format(time.RFC3339))
 	} else {
-		logging.Printfln("Starting non-concurrent processing @ %v", time.Now().Format(time.RFC3339))
+		// TODO: rewrite
+		// logging.Printfln("Starting non-concurrent processing @ %v", time.Now().Format(time.RFC3339))
 		s.Serially()
-		logging.Printfln("Finished non-concurrent processing @ %v", time.Now().Format(time.RFC3339))
+		// TODO: rewrite
+		// logging.Printfln("Finished non-concurrent processing @ %v", time.Now().Format(time.RFC3339))
 	}
 }
 
@@ -51,23 +51,27 @@ func (s *service) Execute() {
 func (s *service) Concurrently() {
 
 	if _, err := os.Stat(config.Opts.File); os.IsNotExist(err) {
-		errors.Print(err, "abort: file '"+config.Opts.File+"' does not seem to exist")
+		// TODO: rewrite
+		//errors.Print(err, "abort: file '"+config.Opts.File+"' does not seem to exist")
 	}
 
 	csvFile, err := os.Open(config.Opts.File)
 	if err != nil {
-		errors.Print(err, "Unable to open file: "+config.Opts.File)
+		// TODO: rewrite
+		// errors.Print(err, "Unable to open file: "+config.Opts.File)
 	}
 	defer func() {
 		if err := csvFile.Close(); err != nil {
-			errors.Print(err, "Unable to close file: "+config.Opts.File)
+			// TODO: rewrite
+			// errors.Print(err, "Unable to close file: "+config.Opts.File)
 			panic(err)
 		}
 	}()
 	csvReader := csv.NewReader(csvFile)
 	decoder, err := csvutil.NewDecoder(csvReader)
 	if err != nil {
-		errors.Print(err, "Error creating decoder")
+		// TODO: rewrite
+		// errors.Print(err, "Error creating decoder")
 	}
 
 	if "user" == config.Opts.Task {
@@ -80,8 +84,9 @@ func (s *service) Concurrently() {
 		users, decoded, done := make(chan []storage.User, numWorkers), make(chan storage.User, numWorkers), make(chan int)
 
 		// Start the number of workers (parsers) determined by numWorkers.
-		logging.Printfln("Starting %v workers...", numWorkers)
-		for i := 0; i < numWorkers; i++ {
+		// TODO: rewrite
+		// logging.Printfln("Starting %v workers...", numWorkers)
+		for i := range numWorkers {
 			go parser.ParseSnippet(i, users, decoded, done)
 		}
 
@@ -111,12 +116,14 @@ func (s *service) Concurrently() {
 		for {
 			select {
 			case user := <-decoded:
-				logging.Printfln("Append user: %v", user)
+				// TODO: rewrite
+				// logging.Printfln("Append user: %v", user)
 				allUsers = append(allUsers, user)
 			case <-done:
 				waits--
 				if waits == 0 {
-					logging.Printfln("Finished user waits @ %v", time.Now().Format(time.RFC3339))
+					// TODO: rewrite
+					// logging.Printfln("Finished user waits @ %v", time.Now().Format(time.RFC3339))
 					return
 				}
 			}
@@ -131,13 +138,15 @@ func (s *service) Concurrently() {
 func (s *service) Serially() {
 	if "user" == config.Opts.Task {
 		parser := storage.NewUserParser()
-		csvBytes, csvError := ioutil.ReadFile(config.Opts.File)
-		errors.Print(csvError, "Error opening CSV file for path: "+config.Opts.File)
+		csvBytes, _ := os.ReadFile(config.Opts.File)
+		// TODO: rewrite
+		// errors.Print(csvError, "Error opening CSV file for path: "+config.Opts.File)
 		parser.FromCSV(csvBytes)
 	} else if "tweet" == config.Opts.Task {
 		parser := storage.NewTweetParser()
-		csvBytes, csvError := ioutil.ReadFile(config.Opts.File)
-		errors.Print(csvError, "Error opening CSV file for path: "+config.Opts.File)
+		csvBytes, _ := os.ReadFile(config.Opts.File)
+		// TODO: rewrite
+		// errors.Print(csvError, "Error opening CSV file for path: "+config.Opts.File)
 		parser.FromCSV(csvBytes)
 	}
 }

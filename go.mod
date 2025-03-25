@@ -1,8 +1,5 @@
-module gitlab.com/TheDonDope/twitter-frequenter
+module github.com/TheDonDope/twitter-frequenter
 
-go 1.15
+go 1.24.1
 
-require (
-	github.com/jszwec/csvutil v1.2.1
-	gitlab.com/TheDonDope/gocha/v3 v3.0.0
-)
+require github.com/jszwec/csvutil v1.10.0
