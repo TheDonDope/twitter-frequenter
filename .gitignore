@@ -229,5 +229,8 @@ $RECYCLE.BIN/
 .vscode/*
 result*
 coordinates.json
-twitter-frequenter
-!/cmd/twitter-frequenter/**
+
+# compiled output
+/bin
+/dist
+/tmp
